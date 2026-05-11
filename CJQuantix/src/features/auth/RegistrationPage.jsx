@@ -26,8 +26,8 @@ const RegistrationPage = () => {
             <p className="text-sm mt-1.5  text-gray-600">
               Sign up to access your manufacturing dashboard.
             </p>
-
             <div className="my-4">
+
               {/* Username field */}
               <div className="my-4">
                 <label
@@ -39,7 +39,7 @@ const RegistrationPage = () => {
                 <div className="flex items-center  px-4  justify-center gap-2   border-2 p-1.5  rounded text-gray-600  mt-1.5">
                   <User />
                   <input
-                    className="w-full p-0.5 outline-none"
+                    className="w-full  outline-none [&:-webkit-autofill]:shadow-[0_0_0_1000px_white_inset] [&:-webkit-autofill]:[-webkit-text-fill-color:black] "
                     type="text"
                     placeholder="Username or email"
                   />
@@ -57,7 +57,7 @@ const RegistrationPage = () => {
                 <div className="flex items-center  px-4  justify-center gap-2   border-2 p-1.5  rounded text-gray-600  mt-1.5">
                   <Mail />
                   <input
-                    className="w-full p-0.5 outline-none"
+                    className="w-full  outline-none [&:-webkit-autofill]:shadow-[0_0_0_1000px_white_inset] [&:-webkit-autofill]:[-webkit-text-fill-color:black] "
                     type="email"
                     placeholder="Email"
                   />
