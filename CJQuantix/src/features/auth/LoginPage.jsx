@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Lock, Mail, Eye, EyeOff, User } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
+
 const LoginPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState('');
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="flex h-screen items-center justify-center  ">
       <div className="login-container flex border-2 px-8 py-12 gap-8 ">
@@ -27,7 +35,6 @@ const LoginPage = () => {
               Log in to access your manufacturing dashboard.
             </p>
             <div className="my-4">
-
               {/* Email field */}
               <div>
                 <label
@@ -37,7 +44,7 @@ const LoginPage = () => {
                   Email
                 </label>
                 <div className="flex items-center  px-4   justify-center gap-2   border-2 p-1.5  rounded text-gray-600  mt-1.5">
-                  <Mail />
+                  <Mail size={20}/>
                   <input
                     className="w-full outline-none [&:-webkit-autofill]:shadow-[0_0_0_1000px_white_inset] [&:-webkit-autofill]:[-webkit-text-fill-color:black] "
                     type="email"
@@ -58,10 +65,18 @@ const LoginPage = () => {
 
                     <input
                       className="outline-none w-full"
-                      type="password"
+                      type= {showPassword ? "text" : "password"}
                       placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
-                    <EyeOff />
+                    <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="focus:outline-none hover:text-purple-600 transition-colors"
+                    >
+                      {showPassword ? <Eye size={20}/> : <EyeOff size={20}/>}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -78,16 +93,19 @@ const LoginPage = () => {
                 </span>
               </div>
               <div className="flex-col items-center justify-center mt-6">
-                <button className="w-full bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-800">
-                  Log In
-                </button>
+                <NavLink to="/forgot-password">
+                  <button className="w-full bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-800">
+                    Log In
+                  </button>
+                </NavLink>
+
                 <div className="items-center center justify-center mt-4 flex">
                   <span>Don't have an account?</span>
                   <NavLink
                     to="/register"
                     className="ml-1 text-sm font-medium text-purple-800 hover:underline cursor-pointer"
                   >
-                    Sign Up
+                   Create account
                   </NavLink>
                 </div>
               </div>
