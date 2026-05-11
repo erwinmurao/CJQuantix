@@ -31,15 +31,15 @@ const LoginPage = () => {
               {/* Email field */}
               <div>
                 <label
-                  className="className= text-md font-medium"
+                  className="className= text-md font-medium "
                   htmlFor="email"
                 >
                   Email
                 </label>
-                <div className="flex items-center  px-4  justify-center gap-2   border-2 p-1.5  rounded text-gray-600  mt-1.5">
+                <div className="flex items-center  px-4   justify-center gap-2   border-2 p-1.5  rounded text-gray-600  mt-1.5">
                   <Mail />
                   <input
-                    className="w-full p-0.5 outline-none"
+                    className="w-full outline-none [&:-webkit-autofill]:shadow-[0_0_0_1000px_white_inset] [&:-webkit-autofill]:[-webkit-text-fill-color:black] "
                     type="email"
                     placeholder="Email or username"
                   />
