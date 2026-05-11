@@ -1,5 +1,6 @@
 import React from "react";
-import { Lock, Mail, Eye, EyeOff } from "lucide-react";
+import { Lock, Mail, Eye, EyeOff, User } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 const LoginPage = () => {
   return (
@@ -23,10 +24,11 @@ const LoginPage = () => {
           <div>
             <h2 className="text-xl font-medium">Welcom back</h2>
             <p className="text-sm mt-1.5  text-gray-600">
-              Sign in to access your manufacturing dashboard.
+              Log in to access your manufacturing dashboard.
             </p>
-            {/* Email field */}
             <div className="my-4">
+
+              {/* Email field */}
               <div>
                 <label
                   className="className= text-md font-medium"
@@ -35,26 +37,33 @@ const LoginPage = () => {
                   Email
                 </label>
                 <div className="flex items-center  px-4  justify-center gap-2   border-2 p-1.5  rounded text-gray-600  mt-1.5">
-                    <Mail />
-                    <input
-                      className="w-full p-0.5 outline-none"
-                      type="email"
-                      placeholder="Email"
-                    />
-                    <Eye />
+                  <Mail />
+                  <input
+                    className="w-full p-0.5 outline-none"
+                    type="email"
+                    placeholder="Email or username"
+                  />
                 </div>
               </div>
+
               {/* Password field */}
               <div className="mt-4">
                 <label className="text-md font-medium" htmlFor="password">
                   Password
                 </label>
-                  <div className="border-2 p-1.5  rounded  text-gray-600 mt-1.5">
-                    <div className="flex items-center px-1  gap-2 mx-1.5">
-                      <Lock />
-                      <input className="outline-none w-full" type="password" placeholder="Password" />
-                    </div>
+
+                <div className="border-2 p-1.5  rounded  text-gray-600 mt-1.5">
+                  <div className="flex items-center px-1  gap-2 mx-1.5">
+                    <Lock />
+
+                    <input
+                      className="outline-none w-full"
+                      type="password"
+                      placeholder="Password"
+                    />
+                    <EyeOff />
                   </div>
+                </div>
               </div>
               <div className="flex items-center mt-4">
                 <input type="checkbox" name="rememberme" id="rememberme" />
@@ -70,13 +79,16 @@ const LoginPage = () => {
               </div>
               <div className="flex-col items-center justify-center mt-6">
                 <button className="w-full bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-800">
-                  Sign in
+                  Log In
                 </button>
                 <div className="items-center center justify-center mt-4 flex">
                   <span>Don't have an account?</span>
-                  <span className="ml-1 text-sm font-medium text-purple-800 hover:underline cursor-pointer">
-                    Sign up
-                  </span>
+                  <NavLink
+                    to="/register"
+                    className="ml-1 text-sm font-medium text-purple-800 hover:underline cursor-pointer"
+                  >
+                    Sign Up
+                  </NavLink>
                 </div>
               </div>
             </div>
