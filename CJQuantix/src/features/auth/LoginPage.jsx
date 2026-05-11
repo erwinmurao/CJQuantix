@@ -92,7 +92,7 @@ const LoginPage = () => {
                   Forgot password?
                 </span>
               </div>
-              <div className="flex-col items-center justify-center mt-6">
+              <div className="flex-col items-center justify-center mt-8">
                 <NavLink to="/forgot-password">
                   <button className="w-full bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-800">
                     Log In
