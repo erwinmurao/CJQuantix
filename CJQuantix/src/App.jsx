@@ -1,9 +1,9 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Dashboard from './pages/Dashboard.jsx'
-import Manufacturing from './features/Manufacturing.jsx'
+import Manufacturing from './features/manufacturing/Manufacturing.jsx'
 import Orders from './features/Orders.jsx'
-import Inventory from './features/Inventory.jsx'
+import Inventory from './features/inventory/Inventory.jsx'
 import LoginPage from './features/auth/LoginPage.jsx'
 import RegistrationPage from './features/auth/RegistrationPage.jsx'
 
