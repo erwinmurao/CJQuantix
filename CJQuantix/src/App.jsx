@@ -9,7 +9,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import Manufacturing from "./features/manufacturing/Manufacturing.jsx";
 import Orders from "./features/Orders.jsx";
 import Inventory from "./features/inventory/Inventory.jsx";
-import ItemLog from "./features/inventory/ItemLog.jsx";
+import ActivityLog from "./features/inventory/ActivityLog.jsx";
 import LoginPage from "./features/auth/LoginPage.jsx";
 import RegistrationPage from "./features/auth/RegistrationPage.jsx";
 
@@ -29,7 +29,7 @@ const App = () => {
 
         {/* Inventory Routes */}
         <Route path="/inventory" element={<Inventory />} />
-        <Route path="/inventory/item-log" element={<ItemLog />} />
+        <Route path="/inventory/Activity-log" element={<ActivityLog />} />
 
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Route>

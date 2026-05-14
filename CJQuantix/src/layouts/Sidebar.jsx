@@ -29,7 +29,7 @@ const Sidebar = () => {
 
   const menuItems = [
     { name: "Dashboard", path: "/dashboard", icon: <LayoutDashboard size={20} /> },
-    { name: "Inventory", icon: <Package size={20} />, hasSubmenu: true }, // Removed 'path' so it doesn't navigate
+    { name: "Product", icon: <Package size={20} />, hasSubmenu: true }, // Removed 'path' so it doesn't navigate
     { name: "Manufacturing", path: "/manufacturing", icon: <Factory size={20} /> },
     { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
   ];
@@ -81,11 +81,11 @@ const Sidebar = () => {
                       }
                     >
                       <Package size={16} />
-                      <span>Item List</span>
+                      <span>Inventory</span>
                     </NavLink>
                     
                     <NavLink
-                      to="/inventory/item-log"
+                      to="/inventory/activity-log"
                       className={({ isActive }) =>
                         `flex items-center gap-3 px-4 py-2 rounded-md text-sm transition-colors ${
                           isActive ? "text-purple-400 bg-slate-800/50" : "text-gray-500 hover:text-white"
@@ -93,7 +93,7 @@ const Sidebar = () => {
                       }
                     >
                       <History size={16} />
-                      <span>Item Log</span>
+                      <span>Activity Log</span>
                     </NavLink>
                   </div>
                 )}
