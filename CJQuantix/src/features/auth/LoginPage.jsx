@@ -12,12 +12,11 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-amber-50 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-amber-50/50 to-amber-100/20 p-4">
+    <div className="flex min-h-screen items-center justify-center p-4">
       {/* Main Container: max 800px, responsive layout */}
-      <div className="login-container w-full max-w-[800px] flex flex-col lg:flex-row items-center bg-white lg:bg-transparent border-2 lg:border-0 rounded-2xl lg:rounded-none shadow-2xl lg:shadow-none overflow-hidden lg:gap-12 p-0">
-        
+      <div className="login-container lg:border-2 lg:p-8 lg:rounded-xl w-full max-w-[900px] flex flex-col lg:flex-row items-center bg-white lg:bg-transparent border-2 rounded-2xl  shadow-2xl lg:shadow-none overflow-hidden lg:gap-4">
         {/* Left Side: Brand/Hero Section */}
-        <div className="w-full lg:w-1/2 p-8 lg:p-0 space-y-6">
+        <div className="w-full  lg:w-1/2 p-8 lg:h-full  lg:p-0 space-y-4">
           {/* Mobile Logo Only */}
           <div className="block lg:hidden w-full flex justify-center mb-4">
             <img
@@ -26,29 +25,28 @@ const LoginPage = () => {
               alt="CJ-Quantix Logo"
             />
           </div>
+          <div className="h-full">
+            {/* Desktop Logo Display */}
+            <div className="hidden lg:block w-full   p-8">
+              <img
+                className="w-full h-50 object-contain "
+                src={White_Logo}
+                alt="CJ-Quantix Logo"
+              />
+            </div>
 
-          {/* Desktop Text Branding */}
-          <div className="hidden lg:block">
-            <h2 className="text-lg font-bold text-gray-500 tracking-wider">
-              CJ-QUANTIX ERP
-            </h2>
-            <h1 className="text-4xl font-extrabold text-slate-900 leading-tight mt-2">
-              Streamline operations.
-              <br />
-              <span className="text-purple-800">Drive efficiency.</span>
-            </h1>
-            <p className="text-gray-600 text-base mt-4 max-w-sm leading-relaxed">
-              A centralized manufacturing and business management system.
-            </p>
-          </div>
-
-          {/* Desktop Logo Display */}
-          <div className="hidden lg:block w-full border-2 border-dashed border-gray-200 rounded-2xl p-8 bg-white/50 backdrop-blur-sm">
-            <img
-              className="w-full h-40 object-contain"
-              src={White_Logo}
-              alt="CJ-Quantix Logo"
-            />
+            {/* Desktop Text Branding */}
+            <div className="hidden lg:block ">
+              
+              <h1 className="text-4xl font-extrabold text-slate-900 leading-tight mt-2">
+                Streamline operations.
+                <br />
+                <span className="text-purple-800">Drive efficiency.</span>
+              </h1>
+              <p className="text-gray-600 text-base mt-4 max-w-sm leading-relaxed">
+                A centralized manufacturing and business management system.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -65,7 +63,10 @@ const LoginPage = () => {
             <div className="space-y-5">
               {/* Email field */}
               <div>
-                <label className="text-sm font-semibold text-gray-700" htmlFor="email">
+                <label
+                  className="text-sm font-semibold text-gray-700"
+                  htmlFor="email"
+                >
                   Email
                 </label>
                 <div className="flex items-center px-4 gap-3 border-2 py-3 rounded-xl text-gray-400 mt-1.5 focus-within:border-purple-600 focus-within:text-purple-600 transition-all">
@@ -81,7 +82,10 @@ const LoginPage = () => {
 
               {/* Password field */}
               <div>
-                <label className="text-sm font-semibold text-gray-700" htmlFor="password">
+                <label
+                  className="text-sm font-semibold text-gray-700"
+                  htmlFor="password"
+                >
                   Password
                 </label>
                 <div className="flex items-center px-4 gap-3 border-2 py-3 rounded-xl text-gray-400 mt-1.5 focus-within:border-purple-600 focus-within:text-purple-600 transition-all">
@@ -94,12 +98,12 @@ const LoginPage = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  <button
-                    type="button"
-                    onClick={togglePasswordVisibility}
-                    className="focus:outline-none hover:text-purple-600"
-                  >
-                    {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                  <button type="button" onClick={togglePasswordVisibility}>
+                    {showPassword ? (
+                      <Eye size={20} className="text-purple-800" />
+                    ) : (
+                      <EyeOff size={20} />
+                    )}
                   </button>
                 </div>
               </div>
@@ -107,8 +111,13 @@ const LoginPage = () => {
               {/* Remember Me / Forgot Password */}
               <div className="flex items-center justify-between text-sm">
                 <label className="flex items-center cursor-pointer group">
-                  <input type="checkbox" className="w-4 h-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500" />
-                  <span className="ml-2 text-gray-600 group-hover:text-gray-900 transition-colors">Remember me</span>
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+                  />
+                  <span className="ml-2 text-gray-600 group-hover:text-gray-900 transition-colors">
+                    Remember me
+                  </span>
                 </label>
                 <span className="font-semibold text-purple-800 hover:underline cursor-pointer">
                   Forgot password?

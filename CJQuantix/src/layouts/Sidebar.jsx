@@ -35,8 +35,8 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="h-screen w-64 bg-slate-900 text-white flex flex-col p-4 font-sans">
-      <div className="mb-4 px-2">
+    <div className="h-screen w-64 bg-slate-900 text-white flex flex-col font-sans">
+      <div className="mb-4 px-4 py-2">
         <img src={Logo} alt="CJ-Quantix Logo" className="w-full object-contain" />
       </div>
 
