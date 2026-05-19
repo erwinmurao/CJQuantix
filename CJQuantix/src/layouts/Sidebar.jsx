@@ -30,12 +30,13 @@ const Sidebar = () => {
   const menuItems = [
     { name: "Dashboard", path: "/dashboard", icon: <LayoutDashboard size={20} /> },
     { name: "Product", icon: <Package size={20} />, hasSubmenu: true }, // Removed 'path' so it doesn't navigate
+    { name: "Sales", path: "/sales", icon: <Factory size={20} /> },
     { name: "Manufacturing", path: "/manufacturing", icon: <Factory size={20} /> },
     { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
   ];
 
   return (
-    <div className="h-screen w-64 bg-slate-900 text-white flex flex-col font-sans">
+    <div className="h-screen w-64 bg-slate-900 text-white flex flex-col font-sans overflow-hidden">
       <div className="mb-4 px-4 py-2">
         <img src={Logo} alt="CJ-Quantix Logo" className="w-full object-contain" />
       </div>
