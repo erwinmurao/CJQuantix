@@ -36,7 +36,7 @@ const Dashboard = () => {
       <div className="md:flex md:justify-between border-2 px-4 py-6 md:py-8 rounded-lg mb-6 bg-white shadow-sm">
         <h1 className="text-xl md:text-2xl font-bold">Inventory Overview</h1>
         <div className=" md:flex md:items-center :text-md md:gap-4">
-          <Download />
+          <Download size={20} />
           <div className="w-full md:w-auto mt-2 md:mt-0 md:bg-blue-500 md:px-6 md:rounded-lg md:py-2 md:text-white transition-all">
             <button>Add</button>
           </div>
@@ -48,7 +48,7 @@ const Dashboard = () => {
         <div className="min-w-[1000px] md:min-w-full">
           {/* Table Header */}
           <div
-            className={`${rowGrid} bg-gray-100 font-bold list-none text-gray-700`}
+            className={`${rowGrid} bg-gray-100 font-md list-none text-gray-700`}
           >
             <li>Product Name</li>
             <li>Quantity</li>
@@ -63,41 +63,40 @@ const Dashboard = () => {
           {/* Table Body */}
           <div className="list-none bg-white">
             {items.map((item, index) => (
-              <li key={index} className={rowGrid} >
+              <li key={index} className={rowGrid}>
                 <div className="flex items-center gap-3 ">
-                  <div className="w-10 h-10 rounded-md overflow-hidden bg-gray-200 flex-shrink-0 border">
+                  <div className="w-10 h-10 rounded-md overflow-hidden bg-gray-200 border">
                     <img
                       src={item.image}
                       alt={item.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <span className="font-semibold text-gray-800 truncate">
+                  <span className=" text-gray-800 truncate">
                     {item.name}
                   </span>
                 </div>
 
-                <span className="text-gray-600">{item.quantity}</span>
-                <span className="text-green-600 font-medium">
+                <span className="">{item.quantity}</span>
+                <span className=" ">
                   +{item.stockIn}
                 </span>
-                <span className="text-red-500 font-medium">
+                <span className=" ">
                   -{item.stockOut}
                 </span>
-                <span className="font-bold text-blue-600">
+                <span className="">
                   {item.available}
                 </span>
                 <span className="text-sm text-gray-400">{item.dateAdded}</span>
                 <span className="text-sm text-gray-400">{item.dateOut}</span>
-                <div className="flex gap-2">
-                  <button className="w-full md:w-auto bg-slate-800 text-white text-xs px-4 py-2 rounded-md hover:bg-slate-700 active:scale-95 transition-all">
-                    <SquarePen />
+                <div className="flex font-light gap-2">
+                  <button className="w-full md:w-auto  text-gray-400 px-4 py-2 rounded-m  hover:text-blue-600 active:scale-95 transition-all">
+                    <SquarePen size={20} />
                   </button>
-                  <button className="w-full md:w-auto text-xs px-4 py-2 rounded-md hover:bg-red-600 active:scale-95 transition-all">
-                    <Trash />
+                  <button className="w-full md:w-auto px-4 text-gray-400 py-2 rounded-md  hover:text-red-600 active:scale-95 transition-all">
+                    <Trash size={20}/>
                   </button>
                 </div>
-              
               </li>
             ))}
           </div>
