@@ -5,7 +5,8 @@ import {
   ChevronDown,
   BarChart3,
   TrendingUp,
-  Users
+  Users,
+  Calendar
 } from "lucide-react";
 
 const Dashboard = () => {
@@ -14,11 +15,27 @@ const Dashboard = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
-  // Close the dropdown cleanly if user clicks anywhere outside of it
+  // Time Range Dropdown States (Chart specific)
+  const [activeTimeRange, setActiveTimeRange] = useState("Last 7 days");
+  const [isTimeMenuOpen, setIsTimeMenuOpen] = useState(false);
+  const timeMenuRef = useRef(null);
+
+  // --- FIXED: Global Header Time Range Dropdown States ---
+  const [activeGlobalTime, setActiveGlobalTime] = useState("1 Day");
+  const [isGlobalTimeMenuOpen, setIsGlobalTimeMenuOpen] = useState(false);
+  const globalTimeMenuRef = useRef(null);
+
+  // Close dropdowns cleanly if user clicks anywhere outside of them
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setIsMenuOpen(false);
+      }
+      if (timeMenuRef.current && !timeMenuRef.current.contains(event.target)) {
+        setIsTimeMenuOpen(false);
+      }
+      if (globalTimeMenuRef.current && !globalTimeMenuRef.current.contains(event.target)) {
+        setIsGlobalTimeMenuOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -38,15 +55,34 @@ const Dashboard = () => {
     { id: "TXN12347", customer: "Bob Johnson", amount: "₱35,000", date: "2026-10-03", item: '27" IPS Monitor', payment: "Bank Transfer", cashier: "System Terminal A", status: "Completed" },
   ];
 
-  // Configuration map to cleanly swap layout metrics based on option selected
   const chartOptions = [
     { id: "Sales", label: "Sales Revenue", icon: <TrendingUp size={14} /> },
     { id: "Orders", label: "Order Volume", icon: <BarChart3 size={14} /> },
     { id: "Customers", label: "Customer Acquisition", icon: <Users size={14} /> },
   ];
 
+  const timeOptions = [
+    { label: "Today" },
+    { label: "Last 7 days" },
+    { label: "Last 28 days" },
+    { label: "Day" },
+    { label: "Week" },
+    { label: "Month" }
+  ];
+
+  // --- NEW: Global header time filtering options ---
+  const globalTimeOptions = [
+    { label: "24 Hours" },
+    { label: "1 Day" },
+    { label: "1 Month" },
+    { label: "3 Months" },
+    { label: "YTD" },
+    { label: "1 Year" },
+    { label: "Max" }
+  ];
+
   return (
-    <div className="w-full max-w-7xl mx-auto flex flex-col gap-6 p-4 md:p-6 text-gray-900">
+    <div className="w-full mx-auto flex flex-col gap-6 p-4 md:p-6 text-gray-900">
       {/* Header Section */}
       <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
         <div>
@@ -54,10 +90,40 @@ const Dashboard = () => {
           <p className="text-sm text-gray-500 mt-0.5">Real-time sales and performance metrics</p>
         </div>
 
-        <button className="flex items-center self-start sm:self-center gap-1.5 border border-gray-300 px-4 py-2 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 active:bg-gray-100 transition-colors shadow-xs cursor-pointer">
-          Last 24 hours
-          <ChevronDown size={16} className="text-gray-500" />
-        </button>
+        {/* --- FIXED: Fully Interactive Global Filter --- */}
+        <div ref={globalTimeMenuRef} className="relative self-start sm:self-center">
+          <button 
+            onClick={() => setIsGlobalTimeMenuOpen((prev) => !prev)}
+            className="flex items-center gap-1.5 border border-gray-300 px-4 py-2 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 active:bg-gray-100 transition-colors shadow-xs cursor-pointer"
+          >
+            {activeGlobalTime}
+            <ChevronDown size={16} className={`text-gray-500 transition-transform duration-200 ${isGlobalTimeMenuOpen ? "rotate-180" : ""}`} />
+          </button>
+
+          {isGlobalTimeMenuOpen && (
+            <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-xl shadow-lg py-1 z-30 animate-in fade-in slide-in-from-top-1 duration-100">
+              <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 border-b border-gray-50 flex items-center gap-1">
+                <Calendar size={10} /> Filter Range
+              </div>
+              {globalTimeOptions.map((option) => (
+                <button
+                  key={option.label}
+                  onClick={() => {
+                    setActiveGlobalTime(option.label);
+                    setIsGlobalTimeMenuOpen(false);
+                  }}
+                  className={`w-full text-left px-3 py-2 text-xs font-medium transition-colors cursor-pointer ${
+                    activeGlobalTime === option.label 
+                      ? "bg-purple-50 text-purple-700 font-semibold" 
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  }`}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Metrics Grid */}
@@ -82,13 +148,44 @@ const Dashboard = () => {
       {/* Interactive Charts Box */}
       <div className="bg-white rounded-xl shadow-xs border border-gray-200/80 p-5 md:p-6">
         <div className="flex justify-between items-start relative">
-          <div>
-            {/* Dynamic Title tied directly to the state selection */}
+          
+          {/* Dynamic Title and Interactive Time Range Menu */}
+          <div ref={timeMenuRef} className="relative">
             <h2 className="text-lg font-bold tracking-tight capitalize">{activeChart} Analytics</h2>
-            <button className="flex items-center gap-1 text-sm font-medium text-gray-500 mt-0.5 hover:text-gray-700 transition-colors cursor-pointer">
-              Last 7 days
-              <ChevronDown size={16} />
+            
+            {/* Clickable time filter layout */}
+            <button 
+              onClick={() => setIsTimeMenuOpen((prev) => !prev)}
+              className="flex items-center gap-1 text-sm font-medium text-purple-600 mt-0.5 hover:text-purple-800 transition-colors cursor-pointer"
+            >
+              {activeTimeRange}
+              <ChevronDown size={16} className={`transition-transform duration-200 ${isTimeMenuOpen ? "rotate-180" : ""}`} />
             </button>
+
+            {/* Time Filter Menu Dropdown Popover */}
+            {isTimeMenuOpen && (
+              <div className="absolute left-0 mt-2 w-44 bg-white border border-gray-200 rounded-xl shadow-lg py-1 z-30 animate-in fade-in slide-in-from-top-1 duration-100">
+                <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 border-b border-gray-50 flex items-center gap-1">
+                  <Calendar size={10} /> Time Interval
+                </div>
+                {timeOptions.map((option) => (
+                  <button
+                    key={option.label}
+                    onClick={() => {
+                      setActiveTimeRange(option.label);
+                      setIsTimeMenuOpen(false);
+                    }}
+                    className={`w-full text-left px-3 py-2 text-xs font-medium transition-colors cursor-pointer ${
+                      activeTimeRange === option.label 
+                        ? "bg-purple-50 text-purple-700 font-semibold" 
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Interactive Controller Dropdown Menu */}
@@ -135,7 +232,7 @@ const Dashboard = () => {
         {/* Chart Window Placeholder Container */}
         <div className="h-64 mt-4 bg-gray-50 border border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center gap-1.5">
           <div className="text-sm font-medium text-gray-500">
-            Rendering <span className="text-purple-600 font-bold capitalize">{activeChart}</span> Chart View
+            Rendering <span className="text-purple-600 font-bold capitalize">{activeChart}</span> Chart View ({activeTimeRange})
           </div>
           <span className="text-xs text-gray-400">(Chart library integration endpoint ready)</span>
         </div>
